@@ -36,5 +36,5 @@ This script automates the installation and configuration of NGINX, PHP, and MySQ
 ## Example Usage
 - Install Laravel and phpMyAdmin
 ```bash
-curl -sL https://raw.githubusercontent.com/mendylivium/lemp-install/master/install-lemp.sh | sudo bash -s --install-php-ext="mbstring xmlrpc gd xml cli zip curl bcmath sqlite3" --install-app="pdo pdo_mysql" --install-phpmyadmin --install-laravel
+curl -sL https://raw.githubusercontent.com/mendylivium/lemp-install/master/install-lemp.sh | sudo bash -s -- --install-php-ext="mbstring xmlrpc gd xml cli zip curl bcmath sqlite3" --install-app="pdo pdo_mysql" --install-phpmyadmin --install-laravel
 
