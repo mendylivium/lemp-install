@@ -82,8 +82,13 @@ mysql -u root -p$DB_PASS -e "CREATE DATABASE IF NOT EXISTS $DB_NAME;"
 
 # Install PHP and Composer
 apt install -y php-fpm php-mysql curl
+
 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
+
 export COMPOSER_ALLOW_SUPERUSER=1
+
+# Detect the installed PHP version
+PHP_VERSION=$(php -r 'echo PHP_MAJOR_VERSION.".".PHP_MINOR_VERSION;')
 
 # Install NGINX
 apt install -y nginx
@@ -119,7 +124,7 @@ server {
       location ~ \.php$ {
           try_files \$uri =404;
           fastcgi_split_path_info ^(.+\.php)(/.+)$;
-          fastcgi_pass $php_sock;
+          fastcgi_pass unix:/var/run/php/php${PHP_VERSION}-fpm.sock;
           fastcgi_index index.php;
           include fastcgi_params;
           fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
@@ -161,7 +166,7 @@ server {
         location ~ \.php\$ {
             try_files \$uri =404;
             fastcgi_split_path_info ^(.+\\.php)(/.+)\$;
-            fastcgi_pass unix:/var/run/php/php8.3-fpm.sock;
+            fastcgi_pass unix:/var/run/php/php${PHP_VERSION}-fpm.sock;
             fastcgi_index index.php;
             include fastcgi_params;
             fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
