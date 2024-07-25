@@ -106,6 +106,10 @@ echo "NGINX configuration file located at: $NGINX_CONF"
 
 # Configure NGINX
 tee /etc/nginx/conf.d/default.conf <<EOF
+map $http_host $php_sock {
+    default unix:/var/run/php/php8.3-fpm.sock;
+    include /etc/nginx/php_sock_map.conf;
+}
 server {
       listen 80;
       index index.php index.html;
@@ -119,7 +123,7 @@ server {
       location ~ \.php$ {
           try_files \$uri =404;
           fastcgi_split_path_info ^(.+\.php)(/.+)$;
-          fastcgi_pass unix:/var/run/php/php8.3-fpm.sock;
+          fastcgi_pass $php_sock;
           fastcgi_index index.php;
           include fastcgi_params;
           fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
