@@ -85,7 +85,7 @@ apt install -y php-fpm php-mysql curl
 
 # Detect the installed PHP version
 PHP_MAJOR_VERSION=$(php -r 'echo PHP_MAJOR_VERSION;')
-PHP_MINOR_VERSION=$(php -r 'echo PHP_MAJOR_VERSION;')
+PHP_MINOR_VERSION=$(php -r 'echo PHP_MINOR_VERSION;')
 PHP_VERSION="$PHP_MAJOR_VERSION.$PHP_MINOR_VERSION"
 
 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
