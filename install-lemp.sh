@@ -83,12 +83,17 @@ mysql -u root -p$DB_PASS -e "CREATE DATABASE IF NOT EXISTS $DB_NAME;"
 # Install PHP and Composer
 apt install -y php-fpm php-mysql curl
 
+# Detect the installed PHP version
+PHP_VERSION=$(php -r 'echo PHP_MAJOR_VERSION.".".PHP_MINOR_VERSION;')
+
 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 
 export COMPOSER_ALLOW_SUPERUSER=1
 
-# Detect the installed PHP version
-PHP_VERSION=$(php -r 'echo PHP_MAJOR_VERSION.".".PHP_MINOR_VERSION;')
+# Configure Composer for PHP versions less than 8.0
+if [ "$(printf '%s\n' "$PHP_VERSION" "8.0" | sort -V | head -n1)" = "$PHP_VERSION" ] && [ "$PHP_VERSION" != "8.0" ]; then
+  composer config -g repo.packagist composer https://packagist.org
+fi
 
 # Install NGINX
 apt install -y nginx
