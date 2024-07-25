@@ -106,10 +106,6 @@ echo "NGINX configuration file located at: $NGINX_CONF"
 
 # Configure NGINX
 tee /etc/nginx/conf.d/default.conf <<EOF
-map $http_host $php_sock {
-    default unix:/var/run/php/php8.3-fpm.sock;
-    include /etc/nginx/php_sock_map.conf;
-}
 server {
       listen 80;
       index index.php index.html;
