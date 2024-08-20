@@ -32,6 +32,7 @@ This script automates the installation and configuration of NGINX, PHP, and MySQ
 - --install-app=<extensions>: Space-separated list of additional packages to install (e.g., bcmath pdo)
 - --install-php-ext=<extensions>: Space-separated list of PHP extensions to install (e.g., bcmath pdo)
 - --install-phpmyadmin: Install and configure phpMyAdmin
+- --for-laravel: Configure for Laravel Project
 
 ## Example Usage
 - Install Laravel and phpMyAdmin
