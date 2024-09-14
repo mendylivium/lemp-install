@@ -43,6 +43,9 @@ while [ $# -gt 0 ]; do
     --install-laravel)
       INSTALL_LARAVEL="true"
       ;;
+    --for-laravel)
+      FOR_LARAVEL="true"
+      ;;
     *)
       echo "Invalid argument: $1"
       exit 1
