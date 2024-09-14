@@ -125,7 +125,7 @@ server {
       root /var/www/$APP_NAME/public;
 
       location / {
-          try_files \$uri \$uri/ ${FOR_LARAVEL:+/index.php?\$query_string} =404;
+          try_files \$uri \$uri/ ${FOR_LARAVEL:+/index.php?\$query_string}${FOR_LARAVEL:+ || =404};
       }
 
       location ~ \.php$ {
